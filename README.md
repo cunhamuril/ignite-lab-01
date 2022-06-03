@@ -1,10 +1,10 @@
 # Ignite Lab 01
 
-- NestJS
-- GraphQL
-- Apache Kafka
-- Next.js
-- Apollo Client (GraphQL)
+- [NestJS](https://nestjs.com/)
+- [GraphQL](https://graphql.org/)
+- [Apache Kafka](https://kafka.apache.org/)
+- [Next.js](https://nextjs.org/)
+- [Apollo Client (GraphQL)](https://www.apollographql.com/docs/react/)
 
 ## Funcionalidades
 
@@ -27,3 +27,7 @@
 
 - [Auth] Listar cursos que tenho acesso
 - [Auth] Acessar conteúdo do curso
+
+## Serviços
+
+- [auth0](https://auth0.com/)
