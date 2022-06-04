@@ -5,7 +5,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import jwt from 'express-jwt';
+import { expressjwt as jwt } from 'express-jwt';
 import { expressJwtSecret } from 'jwks-rsa';
 import { promisify } from 'node:util';
 
@@ -36,6 +36,8 @@ export class AuthorizationGuard implements CanActivate {
 
     const checkJWT = promisify(
       jwt({
+        // eslint-disable-next-line
+        // @ts-ignore
         secret: expressJwtSecret({
           cache: true,
           rateLimit: true,
