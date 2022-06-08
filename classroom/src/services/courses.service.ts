@@ -9,4 +9,12 @@ export class CoursesService {
   listAllCourses() {
     return this.prisma.course.findMany();
   }
+
+  getCourseById(id: string) {
+    return this.prisma.course.findUnique({
+      where: {
+        id,
+      },
+    });
+  }
 }
