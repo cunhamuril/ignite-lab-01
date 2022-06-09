@@ -9,8 +9,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = getSession(req, res);
   const accessToken = getAccessToken(req, res);
 
-  console.log(accessToken);
-
   return {
     redirect: {
       destination: session ? "/app" : "/api/auth/login",
