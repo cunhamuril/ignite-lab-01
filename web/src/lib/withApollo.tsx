@@ -8,7 +8,7 @@ import {
   NormalizedCacheObject,
 } from "@apollo/client";
 
-export type ApolloClientContext = GetServerSidePropsContext
+export type ApolloClientContext = GetServerSidePropsContext;
 
 // HOC - High Order Component
 export const withApollo = (Component: NextPage) => {
@@ -17,7 +17,7 @@ export const withApollo = (Component: NextPage) => {
       /**
        * props.apolloState => é o próprio Apollo que coloca, vem das props do getServerSideProps
        */
-      <ApolloProvider client={getApolloClient(props.apolloState)}>
+      <ApolloProvider client={getApolloClient(undefined, props.apolloState)}>
         <Component {...props} />
       </ApolloProvider>
     );
@@ -29,7 +29,10 @@ export const withApollo = (Component: NextPage) => {
  * @param ssrCache cache do lado do servidor
  * @returns apolloClient
  */
-export function getApolloClient(ssrCache?: NormalizedCacheObject) {
+export function getApolloClient(
+  ctx?: ApolloClientContext,
+  ssrCache?: NormalizedCacheObject
+) {
   const httpLink = createHttpLink({
     uri: "http://localhost:3332/graphql",
     fetch,
