@@ -1,17 +1,33 @@
 import {
-  getAccessToken,
+  // getAccessToken,
   useUser,
   withPageAuthRequired,
 } from "@auth0/nextjs-auth0";
 
-export default function Home() {
+import { Product } from "../../graphql/generated/graphql";
+import {
+  getServerPageGetProducts,
+  ssrGetProducts,
+} from "../../graphql/generated/page";
+import { withApollo } from "../../lib/withApollo";
+
+interface HomeProps {
+  data: {
+    products: Product[];
+  };
+}
+
+function Home({ data }: HomeProps) {
   const { user } = useUser();
+  /* ESTE É O FORMATO PADRÃO DA QUERIES EM CLIENT SIDE */
+  // const { data, loading, error } = useGetProductsQuery();
 
   return (
     <div>
+      <pre>{JSON.stringify(data.products, null, 2)}</pre>
       <pre>{JSON.stringify(user, null, 2)}</pre>
 
-      <a href="/api/auth/logout">Logout</a>
+      {/* <a href="/api/auth/logout">Logout</a> */}
     </div>
   );
 }
@@ -39,12 +55,15 @@ export default function Home() {
 /**
  * Este código:
  */
+/* ESTE É O FORMATO PADRÃO DA QUERIES EM SERVER SIDE */
 export const getServerSideProps = withPageAuthRequired({
-  getServerSideProps: async ({ req, res }) => {
-    console.log(getAccessToken(req, res));
+  getServerSideProps: async (ctx) => {
+    // const { req, res } = ctx
+    // console.log(getAccessToken(req, res));
 
-    return {
-      props: {},
-    };
+    return getServerPageGetProducts({}, ctx);
   },
 });
+
+// @ts-ignore
+export default withApollo(ssrGetProducts.withPage()(Home));
