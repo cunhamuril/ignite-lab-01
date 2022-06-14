@@ -60,21 +60,31 @@ function Courses() {
 
             <div className="bg-white shadow overflow-hidden sm:rounded-md mt-8">
               <ul role="list" className="divide-y divide-gray-200">
-                {/* {data?.me.enrollments.map((enrollment) => (
+                {data?.me.enrollments.map((enrollment) => (
                   <li key={enrollment.id}>
                     <div className="px-4 py-4 flex items-center sm:px-6">
                       <div className="min-w-0 flex-1 sm:flex sm:items-center sm:justify-between">
                         <div className="truncate">
                           <div className="flex text-sm">
-                            <p className="font-medium text-indigo-600 truncate">{enrollment.course.title}</p>
-                            <p className="ml-1 flex-shrink-0 font-normal text-gray-500">em Programação</p>
+                            <p className="font-medium text-indigo-600 truncate">
+                              {enrollment.course.title}
+                            </p>
+                            <p className="ml-1 flex-shrink-0 font-normal text-gray-500">
+                              em Programação
+                            </p>
                           </div>
                           <div className="mt-2 flex">
                             <div className="flex items-center text-sm text-gray-500">
-                              <CalendarIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" aria-hidden="true" />
+                              <CalendarIcon
+                                className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                                aria-hidden="true"
+                              />
                               <p>
-                                Turma inicia em <time dateTime={enrollment.createdAt}>
-                                  {dateFormatter.format(new Date(enrollment.createdAt))}
+                                Turma inicia em{" "}
+                                <time dateTime={enrollment.createdAt}>
+                                  {dateFormatter.format(
+                                    new Date(enrollment.createdAt)
+                                  )}
                                 </time>
                               </p>
                             </div>
@@ -102,7 +112,7 @@ function Courses() {
                       </div>
                     </div>
                   </li>
-                ))} */}
+                ))}
               </ul>
             </div>
           </main>
