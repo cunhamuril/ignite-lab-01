@@ -8,8 +8,12 @@ import {
   getServerPageGetProducts,
   ssrGetProducts,
 } from "../graphql/generated/pagePublic";
-import { GetProductsQuery } from "../graphql/generated/graphql";
+import {
+  GetProductsQuery,
+  useCreatePurchaseMutation,
+} from "../graphql/generated/graphql";
 import { ApolloError } from "@apollo/client";
+import { withApollo } from "../lib/withApollo";
 
 interface EnrollProps {
   // like ssrGetProducts.withPage() suggest
@@ -18,6 +22,18 @@ interface EnrollProps {
 }
 
 function Enroll({ data }: EnrollProps) {
+  const [createPurchase] = useCreatePurchaseMutation();
+
+  async function handlePurchaseProduct(productId: string) {
+    await createPurchase({
+      variables: {
+        productId,
+      },
+    });
+
+    alert("Compra realizada com sucesso!");
+  }
+
   return (
     <>
       <Head>
@@ -57,7 +73,7 @@ function Enroll({ data }: EnrollProps) {
                       </div>
                       <div className="ml-5 flex-shrink-0">
                         <button
-                          // onClick={() => handlePurchaseProduct(product.id)}
+                          onClick={() => handlePurchaseProduct(product.id)}
                           className="px-2 py-1 border border-transparent text-base font-medium rounded-md text-white bg-violet-600 hover:bg-violet-700"
                         >
                           Realizar inscrição
@@ -85,4 +101,4 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-export default withPublicApollo(ssrGetProducts.withPage()(Enroll));
+export default withApollo(ssrGetProducts.withPage()(Enroll));
